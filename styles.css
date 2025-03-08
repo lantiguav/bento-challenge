@@ -1,0 +1,303 @@
+@layer base, theme, components, utilities;
+@font-face {
+    font-family: 'DMSans';
+    src: url('/assets/fonts/DMSans-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 400 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DMSans';
+    src: url('/assets/fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 400 500;
+    font-style: normal;
+}
+
+@layer base {
+  :root {
+    --heading-1: 2.986rem;
+    --heading-2: 2.488rem;
+    --heading-3: 2.074rem;
+    --heading-4: 1.728rem;
+    --heading-5: 1.44rem;
+
+    --body-1: 1.125rem;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  html {
+    min-height: 100vh;
+  }
+
+
+  body {
+    background-color: var(--color-gray-100);
+    font-family: "DMSans", sans-serif;
+    font-size: var(--body-1);
+    padding: 1.5rem;
+    margin: 0 auto;
+  }
+
+  main {
+    max-width: 70rem;
+    margin: 0 auto;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    text-wrap: pretty;
+    font-size: var(--heading-2);
+    font-weight: 400;
+    line-height: .9;
+
+    @media (width >= 64em) {
+      font-size: var(--heading-1);
+    }
+  }
+
+}
+
+@layer theme {
+  :root {
+    --color-gray-100: #f5f5f5;
+
+    --color-purple-100: hsl(254, 88%, 90%);
+    --color-purple-500: hsl(256, 67%, 59%);
+    --color-yellow-100: hsl(31, 66%, 93%);
+    --color-yellow-500: hsl(39, 100%, 71%);
+    --color-white: hsl(0, 0%, 100%);
+    --color-black: hsl(0, 0%, 7%);
+  }
+}
+
+@layer components {
+  .bento {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (width >= 40em) {
+      display: grid;
+      grid-template-areas: 
+        "social social"
+        "schedule write"
+        "create manage"
+        "maintain faster"
+        "grow grow"
+
+    }
+
+    @media (width >= 52em) {
+      grid-template-areas:
+        "social social schedule"
+        "write create schedule"
+        "write create maintain"
+        "manage manage maintain"
+        "faster grow grow";
+
+    }
+
+    @media (width >= 64em) {
+      grid-template-areas:
+        "create social social schedule"
+        "create manage maintain schedule"
+        "write manage maintain schedule"
+        "write faster grow grow";
+
+      grid-template-rows: auto 3rem auto auto;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .card {
+    --bg-color: var(--color-white);
+    --text-color: var(--color-black);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+  }
+
+  .card--yellow-100 {
+    --bg-color: var(--color-yellow-100);
+    --text-color: var(--color-black);
+  }
+
+  .card--yellow-500 {
+    --bg-color: var(--color-yellow-500);
+    --text-color: var(--color-black);
+  }
+
+  .card--purple-100 {
+    --bg-color: var(--color-purple-100);
+    --text-color: var(--color-black);
+  }
+
+  .card--purple-500 {
+    --bg-color: var(--color-purple-500);
+    --text-color: var(--color-white);
+  }
+
+  .card--create {
+    grid-area: create;
+    
+    img {
+      max-width: 12rem;
+    }
+  }
+
+  .card--social {
+    padding: 1.5rem;
+    grid-area: social;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      margin-bottom: 0.5rem;
+      max-width: 12rem;
+    }
+  }
+
+  .card--schedule {
+    grid-area: schedule;
+    text-align: center;
+
+    @media (width >= 64rem) {
+      text-align: start;
+
+      img {
+        height: 20rem;
+        max-width: unset;
+      }
+    }
+  }
+
+  .card--manage {
+    grid-area: manage;
+  }
+
+  .card--maintain {
+    grid-area: maintain;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    img {
+      margin-bottom: -5rem;
+    }
+  }
+
+  .card--write {
+    grid-area: write;
+
+    img {
+      max-width: 12rem;
+      @media (width >= 40em) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .card--faster {
+    grid-area: faster;
+
+    img {
+      max-width: 12rem;
+    }
+  }
+
+  .card--grow {
+    text-align: center;
+    grid-area: grow;
+
+
+    .image-wrapper {
+      margin: 0 auto;
+      max-width: 12rem;
+      flex-shrink: 0;
+    }
+
+    @media (width >= 52em) {
+      display: flex;
+      gap: 1rem;
+      text-align: start;
+      align-items: center;
+
+      .image-wrapper {
+        max-width: 12rem;
+        flex-grow: 0;
+      }
+    }
+  }
+
+  .attribution {
+    padding: 2rem;
+    text-align: center;
+
+    a {
+      color: var(--color-purple-500);
+      text-underline-offset: .25rem;
+    }
+  }
+}
+
+@layer utilities {
+  .text-yellow-500 {
+    color: var(--color-yellow-500);
+  }
+
+  .text-purple-500 {
+    color: var(--color-purple-500);
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .font-semi-bold {
+    font-weight: 500;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-base {
+    font-size: var(--body-1);
+  }
+
+  .text-2xl {
+    font-size: var(--heading-3);
+
+    @media (width >= 64em) {
+      font-size: var(--heading-1);
+    }
+  }
+
+  .text-xl {
+    font-size: var(--heading-4);
+
+    @media (width >= 64em) {
+      font-size: var(--heading-2);
+    }
+  }
+
+  .text-lg {
+    font-size: var(--heading-5);
+
+    @media (width >= 64em) {
+      font-size: var(--heading-3);
+    }
+  }
+}
+
+
